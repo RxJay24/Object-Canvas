@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Object Canvas — Sri Lanka's 2022 Crisis Archive</title>
+  
+  <!-- SEO Meta Tags -->
+  <meta name="description" content="A living citizen history archive of Sri Lanka's 2022 crisis. Explore objects, memories, and stories that defined a period of resilience, protest, and economic hardship.">
+  <meta name="keywords" content="Sri Lanka 2022 crisis, Aragalaya, citizen archive, history, economic crisis, memories, GOTAGOHOME">
+  <meta name="author" content="The Object Canvas Team">
+  
+  <!-- Google Fonts: Lora (headings) & Inter (UI/body) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&family=Inter:wght@300;400;500;600;700&family=Courier+Prime:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  
+  <!-- Intro Overlay Sequence -->
+  <div id="intro-overlay" class="intro-active">
+    <!-- Intro Step 0: Language Selection -->
+    <div id="intro-step-0" class="intro-step intro-visible">
+      <div class="intro-content">
+        <h1 class="intro-title" style="font-size: 2.2rem; margin-bottom: 3rem;">Choose your language<br><span style="font-size: 1.5rem; color: #666; font-family: 'Inter', sans-serif; font-weight: 400;">භාෂාව තෝරන්න | மொழியை தேர்ந்தெடுக்கவும்</span></h1>
+        
+        <div class="language-buttons-container" style="display: flex; flex-direction: column; gap: 1rem; width: 100%; max-width: 300px; margin: 0 auto;">
+          <button id="lang-en-btn" class="intro-btn" style="margin-bottom: 0;">English</button>
+          <button id="lang-si-btn" class="intro-btn lang-disabled" style="margin-bottom: 0; opacity: 0.6;">සිංහල</button>
+          <button id="lang-ta-btn" class="intro-btn lang-disabled" style="margin-bottom: 0; opacity: 0.6;">தமிழ்</button>
+        </div>
+        
+        <p id="lang-warning" style="font-family: 'Inter', sans-serif; font-size: 0.85rem; color: var(--color-brand-red); margin-top: 1.5rem; opacity: 0; transition: opacity 0.3s ease;">
+          Not available in this prototype.
+        </p>
+      </div>
+    </div>
+    
+    <!-- Intro Step 1: Welcome -->
+    <div id="intro-step-1" class="intro-step intro-hidden">
+      <div class="intro-content">
+        <h1 class="intro-eyebrow">The Object Canvas</h1>
+        <div class="intro-divider"></div>
+        <p class="intro-statement">
+          <span class="fade-word" style="animation-delay: 0.50s">In</span>
+          <span class="fade-word" style="animation-delay: 0.75s">2022,</span>
+          <span class="fade-word" style="animation-delay: 1.00s">Sri</span>
+          <span class="fade-word" style="animation-delay: 1.25s">Lanka</span>
+          <span class="fade-word" style="animation-delay: 1.50s">faced</span>
+          <span class="fade-word" style="animation-delay: 1.75s">its</span>
+          <span class="fade-word" style="animation-delay: 2.00s">worst</span>
+          <span class="fade-word" style="animation-delay: 2.25s">economic</span>
+          <span class="fade-word" style="animation-delay: 2.50s">crisis</span>
+          <span class="fade-word" style="animation-delay: 2.75s">since</span>
+          <span class="fade-word" style="animation-delay: 3.00s">independence.</span><br>
+          <span class="fade-word" style="animation-delay: 3.75s">This</span>
+          <span class="fade-word" style="animation-delay: 4.00s">is</span>
+          <span class="fade-word" style="animation-delay: 4.25s">a</span>
+          <span class="fade-word" style="animation-delay: 4.50s">space</span>
+          <span class="fade-word" style="animation-delay: 4.75s">to</span>
+          <span class="fade-word" style="animation-delay: 5.00s">remember</span>
+          <span class="fade-word" style="animation-delay: 5.25s">it</span>
+          <span class="fade-word" style="animation-delay: 5.50s">—</span><br>
+          <span class="fade-word" style="animation-delay: 6.00s">one</span>
+          <span class="fade-word" style="animation-delay: 6.25s">object</span>
+          <span class="fade-word" style="animation-delay: 6.50s">at</span>
+          <span class="fade-word" style="animation-delay: 6.75s">a</span>
+          <span class="fade-word" style="animation-delay: 7.00s">time.</span>
+        </p>
+        <button id="intro-enter-btn" class="intro-btn fade-in-delayed" style="animation-delay: 8.5s;">Enter the canvas</button>
+        <a href="#" id="intro-learn-more" class="intro-link fade-in-delayed" style="animation-delay: 9.0s;">Learn more</a>
+      </div>
+    </div>
+    
+    <!-- Intro Step 2: Random Object Example -->
+    <div id="intro-step-2" class="intro-step intro-hidden">
+      <div class="intro-content step2-content">
+        <!-- This container is dynamically populated by app.js -->
+        <div id="intro-object-demo-container"></div>
+        
+        <p id="intro-drag-prompt" class="fade-in-delayed" style="color: #9E3326; font-family: var(--font-sans); font-weight: 600; margin-top: 14rem; font-size: 20px;">Move around to see more objects.</p>
+      </div>
+    </div>
+    
+  </div>
+  <!-- App Wrapper -->
+  <div id="app-container">
+    
+    <!-- Header Bar (Floating at Top) -->
+    <header id="header-bar" class="floating-panel">
+      <div class="header-logo-group">
+        <svg class="brand-logo-icon" viewBox="0 0 144 144" width="48" height="48" xmlns="http://www.w3.org/2000/svg" aria-label="The Object Canvas Logo">
+          <polyline points="35,35 3,35 3,141 89,141 89,114" stroke="#252525" stroke-width="6" fill="none" stroke-linejoin="miter" stroke-linecap="butt" />
+          <polyline points="35,35 89,35 89,114" stroke="#9E3326" stroke-width="6" fill="none" stroke-linejoin="miter" stroke-linecap="butt" />
+          <rect x="35" y="3" width="106" height="111" stroke="#9E3326" stroke-width="6" fill="none" />
+        </svg>
+        <div class="brand-text-group">
+          <h1 id="app-title">The Object Canvas</h1>
+          <p id="app-subtitle">A living citizen history archive of Sri Lanka's 2022 crisis</p>
+        </div>
+      </div>
+      
+      <div class="header-separator"></div>
+
+      <div class="search-container">
+        <div class="search-box-inner">
+          <div class="search-input-wrapper">
+            <input type="text" id="search-input" placeholder="Search objects or memories..." aria-label="Search objects or memories">
+            <button id="search-submit-btn" class="search-arrow-btn" aria-label="Search">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="16" height="16">
+                <circle cx="11" cy="11" r="8"></circle>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+      
+      <div class="header-separator-dashed"></div>
+
+      <div id="auth-header-controls" class="header-auth-controls">
+        <button id="header-auth-btn" class="header-btn">Log in</button>
+      </div>
+    </header>
+
+    <!-- Canvas Viewport (Pannable & Zoomable Container) -->
+    <main id="canvas-viewport">
+      <!-- The Canvas Surface itself (3000px x 2000px) -->
+      <div id="canvas-surface" class="draggable">
+        
+        <!-- Speckles / Confetti Dots Layer (Dynamic) -->
+        <div id="canvas-dots-layer"></div>
+        
+        <!-- Objects Layer (Dynamic Reactivity) -->
+        <div id="canvas-objects-layer"></div>
+      </div>
+    </main>
+
+    <!-- Floating Banner (Top-Left) -->
+    <div id="floating-callout-card" class="floating-panel">
+      <h2 class="callout-title">Is there an object from this period that you still think about?</h2>
+      <p class="callout-text">Add it to the canvas. Your memory becomes part of our shared archive.</p>
+      <button id="add-object-trigger-btn" class="action-btn-primary">
+        Add an object
+        <span class="btn-icon-plus">+</span>
+      </button>
+    </div>
+
+    <!-- Zoom Controls (Bottom-Left) -->
+    <nav id="zoom-controls" class="floating-panel" aria-label="Canvas Zoom Controls">
+      <button id="zoom-in-btn" class="zoom-btn" title="Zoom In" aria-label="Zoom In">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+      </button>
+      <button id="zoom-out-btn" class="zoom-btn" title="Zoom Out" aria-label="Zoom Out">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+      </button>
+      <button id="zoom-reset-btn" class="zoom-btn" title="Center Canvas" aria-label="Reset Zoom and Center">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><circle cx="12" cy="12" r="3"></circle></svg>
+      </button>
+    </nav>
+
+    <!-- Stats Indicator (Bottom-Right, Next to Sidebar) -->
+    <div id="bottom-stats-counter" class="floating-panel">
+      <span id="stat-objects-count">1,248</span> objects <span class="bullet-dot">•</span> <span id="stat-memories-count">8,732</span> memories
+    </div>
+
+    <!-- Right Side Drawer/Sidebar (Details & Memory Log) -->
+    <aside id="side-drawer" class="drawer-closed" aria-hidden="true">
+      <div id="drawer-resizer" class="drawer-resizer"></div>
+      <button id="drawer-close-btn" aria-label="Close drawer">×</button>
+      
+      <!-- Drawer Header Image & Title -->
+      <div class="drawer-hero">
+        <div id="drawer-object-illustration-container"></div>
+        <div class="drawer-title-group">
+          <h2 id="drawer-object-title">Rice</h2>
+          <p id="drawer-object-memories-count">189 memories of this object</p>
+        </div>
+      </div>
+
+      <!-- Tabs Navigation -->
+      <nav class="drawer-tabs" style="display: none;">
+        <button id="tab-btn-memories" class="tab-btn active" data-tab="memories">Memories</button>
+      </nav>
+
+      <!-- Tabs Content Container -->
+      <div class="drawer-body">
+        <!-- Memories Tab -->
+        <section id="tab-content-memories" class="tab-content active-content">
+          <div id="memories-feed">
+            <!-- Dynamic memories list -->
+          </div>
+        </section>
+
+
+      </div>
+
+      <!-- Drawer Sticky Footer (Add Memory Trigger & Inline Form) -->
+      <div class="drawer-footer">
+        <div class="add-memory-cta-card" id="drawer-memory-card">
+          <!-- Default CTA State -->
+          <div id="drawer-memory-cta-state" style="width: 100%;">
+            <h3 class="cta-title">Add your memory</h3>
+            <p class="cta-text">Did this object have a different meaning for you?</p>
+            <button id="add-memory-trigger-btn" class="action-btn-primary">
+              Add your memory
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="btn-icon-pencil"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg>
+            </button>
+          </div>
+          
+          <!-- Form State -->
+          <div id="drawer-memory-form-state" class="hidden" style="width: 100%;">
+            <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #b82b2b; margin-bottom: 12px; width: 100%;">
+              <h3 class="cta-title" style="border-bottom: none; margin-bottom: 0; padding-bottom: 0;">Share a Memory</h3>
+              <button id="drawer-memory-cancel-btn" type="button" style="background: none; border: none; font-size: 20px; cursor: pointer; color: var(--color-secondary); line-height: 1;">×</button>
+            </div>
+            <form id="add-memory-form" style="width: 100%;">
+              <div class="form-group" style="margin-bottom: 12px;">
+                <textarea id="mem-text" class="form-textarea" rows="4" placeholder="How did this object affect your daily life during the crisis? What do you remember most about it?" required style="font-size: 12px; padding: 10px;"></textarea>
+              </div>
+              <div class="media-selector-container" data-target="drawer" style="margin-bottom: 12px;">
+                <button type="button" class="add-media-toggle-btn" style="font-size: 11px; padding: 6px 10px;">📎 Add Media</button>
+                <div class="media-options hidden">
+                  <button type="button" class="media-option-btn" data-type="image">🖼️ Image</button>
+                  <button type="button" class="media-option-btn" data-type="video">🎬 Video</button>
+                  <button type="button" class="media-option-btn" data-type="audio">🎵 Audio</button>
+                </div>
+                <div class="media-selected-state hidden">
+                  <span class="media-selected-label"></span>
+                  <button type="button" class="media-remove-btn" aria-label="Remove media">×</button>
+                </div>
+                <input type="hidden" id="mem-media-type" value="text">
+              </div>
+              <button type="submit" class="action-btn-primary full-width-btn" style="padding: 10px;">Submit Memory</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Overlay Backdrop -->
+    <div id="drawer-backdrop" class="hidden-backdrop"></div>
+    <div id="modal-backdrop" class="hidden-backdrop"></div>
+
+    <!-- Modals Container -->
+    
+    <!-- Modal 1: Add New Object (Now a Bottom Panel) -->
+    <div id="add-object-modal" class="bottom-panel hidden-modal" role="dialog" aria-modal="true" aria-labelledby="modal-step-title">
+      <button class="modal-close-btn" aria-label="Close modal" style="top: 15px; right: 15px; position: absolute; z-index: 20;">×</button>
+      <div class="modal-body" style="padding: 2rem;">
+        <h2 id="modal-step-title" class="modal-title" style="font-size: 14px; margin-bottom: 16px;">What would you like to add?</h2>
+        <form id="add-object-form">
+          <div class="form-group">
+            <label for="new-obj-name" class="form-label">Object Name</label>
+            <input type="text" id="new-obj-name" class="form-input" placeholder="e.g., Candle, Gas cylinder, Rice bag" required autocomplete="off">
+            <div id="add-object-error" class="form-error-msg hidden"></div>
+          </div>
+          <button type="submit" id="add-obj-submit-btn" class="action-btn-primary full-width-btn" style="margin-top: 12px;">Place Object on Canvas</button>
+        </form>
+        
+        <!-- Generation Overlay -->
+        <div id="generation-overlay" class="hidden" style="position: absolute; inset: 0; background: rgba(250, 248, 245, 0.95); display: flex; flex-direction: column; align-items: center; justify-content: center; z-index: 10;">
+          <div class="ai-spinner"></div>
+          <p id="generation-overlay-text" style="font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; color: var(--color-primary); margin-top: 12px; text-align: center;">Please wait...</p>
+        </div>
+      </div><!-- end modal-body -->
+    </div><!-- end add-object-modal -->
+
+    <!-- Floating Memory Prompt Card (Appears near object) -->
+    <div id="memory-prompt-card" class="floating-panel hidden" role="dialog" aria-modal="true" aria-labelledby="modal-step2-title">
+      <button class="modal-close-btn" id="memory-prompt-close-btn" aria-label="Close modal" style="top: 12px; right: 12px; position: absolute; z-index: 20; font-size: 20px;">×</button>
+      <h2 class="modal-title" id="modal-step2-title" style="font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.4px; color: var(--color-secondary); margin-bottom: 12px; padding-right: 20px;">What's your memory of this?</h2>
+      <form id="add-memory-inline-form">
+        <div class="form-group">
+          <label for="mem2-text" class="form-label hidden">Your memory</label>
+          <textarea id="mem2-text" class="form-textarea" placeholder="How did this object affect your daily life?" style="min-height: 80px; padding: 12px; font-size: 13px; resize: none;"></textarea>
+        </div>
+        <div class="media-selector-container" data-target="inline">
+          <button type="button" class="add-media-toggle-btn">📎 Add Media</button>
+          <div class="media-options hidden">
+            <button type="button" class="media-option-btn" data-type="image">🖼️ Image</button>
+            <button type="button" class="media-option-btn" data-type="video">🎬 Video</button>
+            <button type="button" class="media-option-btn" data-type="audio">🎵 Audio</button>
+          </div>
+          <div class="media-selected-state hidden">
+            <span class="media-selected-label"></span>
+            <button type="button" class="media-remove-btn" aria-label="Remove media">×</button>
+          </div>
+          <input type="hidden" id="mem2-media-type" value="text">
+        </div>
+        <div class="modal-step2-actions" style="margin-top: 16px;">
+          <button type="submit" class="action-btn-primary full-width-btn" style="padding: 10px; font-size: 13px;">Save Memory</button>
+          <button type="button" id="skip-memory-btn" class="skip-memory-link">Skip for now</button>
+        </div>
+      </form>
+    </div>
+
+
+
+
+    <!-- AUTH MODAL (Now a Side Panel) -->
+    <div id="auth-modal" class="side-panel hidden-modal">
+      <div class="modal-header">
+        <h2 id="auth-modal-title" class="modal-title">Join the Archive</h2>
+        <button id="auth-close-btn" class="modal-close-btn" aria-label="Close modal">×</button>
+      </div>
+      
+      <!-- View 1: Auth Options -->
+      <div id="auth-view-options" class="auth-view active">
+        <p class="auth-desc">To contribute an object or memory, please login.</p>
+        <button id="auth-google-btn" class="auth-btn-google">
+          <svg viewBox="0 0 24 24" width="20" height="20" xmlns="http://www.w3.org/2000/svg">
+            <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
+            <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
+            <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/>
+            <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
+          </svg>
+          Continue with Google
+        </button>
+        <div class="auth-separator"><span>or</span></div>
+        <button id="auth-email-btn" class="auth-btn-secondary">Continue with Email</button>
+        <p class="auth-switch-text" style="margin-top: 1.5rem;">
+          Don't you have an account? <a href="#" id="auth-opt-signup-link">Sign up</a>
+        </p>
+      </div>
+
+        <!-- View 2: Email Sign Up / Log In Form -->
+      <div id="auth-view-form" class="auth-view hidden">
+        <form id="auth-form" class="standard-form">
+          <div class="form-group" id="auth-username-group" style="display: none;">
+            <label for="auth-username" class="form-label">Username</label>
+            <input type="text" id="auth-username" class="form-input" placeholder="How should we attribute your contributions?">
+          </div>
+          <div class="form-group">
+            <label for="auth-email" class="form-label">Email</label>
+            <input type="email" id="auth-email" class="form-input" placeholder="Your email address" required>
+          </div>
+          <div class="form-group">
+            <label for="auth-password" class="form-label">Password</label>
+            <input type="password" id="auth-password" class="form-input" placeholder="Enter your password" required>
+          </div>
+          <div class="form-group toggle-group" id="auth-anonymous-group">
+            <span class="toggle-label-text">Keep my contributions anonymous</span>
+            <label class="toggle-switch">
+              <input type="checkbox" id="auth-anonymous-check">
+              <span class="toggle-slider"></span>
+            </label>
+          </div>
+          <button type="submit" class="action-btn-primary full-width-btn" id="auth-submit-btn">Log In</button>
+          <p class="auth-switch-text">
+            <span id="auth-switch-label">Need an account?</span> 
+            <a href="#" id="auth-switch-link">Sign up</a>
+          </p>
+        </form>
+      </div>
+
+      <!-- View 3: Loading -->
+      <div id="auth-view-loading" class="auth-view hidden" style="text-align: center; padding: 3rem 0;">
+        <div class="ai-spinner" style="margin: 0 auto;"></div>
+        <p style="color: var(--color-text-medium); margin-top: 1rem;">Signing in with Google...</p>
+      </div>
+
+      <!-- View 4: Success -->
+      <div id="auth-view-success" class="auth-view hidden" style="text-align: center; padding: 2rem 0;">
+        <div style="font-size: 3rem; color: #4CAF50; margin-bottom: 1rem;">✓</div>
+        <h3 style="font-family: 'Lora', serif; font-size: 1.5rem; margin-bottom: 1rem;" id="auth-success-title">Account Created</h3>
+        <p style="color: var(--color-text-medium); margin-bottom: 2rem;" id="auth-success-msg">You are now signed in.</p>
+        <button id="auth-done-btn" class="action-btn-primary full-width-btn">Done</button>
+      </div>
+    </div>
+
+    <!-- DASHBOARD MODAL (Now a Side Panel) -->
+    <div id="dashboard-modal" class="side-panel hidden-modal">
+      <div class="modal-header">
+        <h2 class="modal-title">My Contributions</h2>
+        <button id="dashboard-close-btn" class="modal-close-btn" aria-label="Close modal">×</button>
+      </div>
+      <div class="modal-body" style="max-height: 60vh; overflow-y: auto;">
+        <p class="auth-desc" style="margin-bottom: 2rem;">Manage the objects and memories you've added to the archive.</p>
+        
+        <h3 class="dashboard-section-title">My Objects</h3>
+        <div id="dashboard-objects-list" class="dashboard-list">
+          <!-- Populated by JS -->
+        </div>
+
+        <h3 class="dashboard-section-title" style="margin-top: 2rem;">My Memories</h3>
+        <div id="dashboard-memories-list" class="dashboard-list">
+          <!-- Populated by JS -->
+        </div>
+      </div>
+      <div class="modal-footer" style="margin-top: 2rem; display: flex; justify-content: flex-end;">
+        <button id="dashboard-logout-btn" class="auth-btn-secondary" style="width: auto; padding: 0.5rem 1.5rem; margin: 0; color: var(--color-brand-red); border-color: var(--color-brand-red);">Log Out</button>
+      </div>
+    </div>
+
+    <!-- EDIT MODAL (Now a Side Panel) -->
+    <div id="edit-modal" class="side-panel hidden-modal">
+      <div class="modal-header">
+        <h2 id="edit-modal-title" class="modal-title">Edit Object</h2>
+        <button id="edit-close-btn" class="modal-close-btn" aria-label="Close modal">×</button>
+      </div>
+      <div class="modal-body" style="position: relative; overflow-y: auto; display: flex; flex-direction: column;">
+        
+        <form id="edit-form" class="standard-form" style="display: flex; flex-direction: column; flex: 1;">
+          
+          <div style="display: flex; flex-direction: column; gap: 20px; align-items: stretch; margin-bottom: 24px; flex: 1;">
+            
+            <div style="display: flex; gap: 20px; align-items: flex-start;">
+              <!-- Image Box -->
+              <div id="edit-image-container" class="edit-image-preview-box" style="flex: 0 0 120px; height: 120px; margin-bottom: 0;">
+                <img id="edit-image-preview" src="" alt="Object preview" style="width: 100%; height: 100%; object-fit: contain;">
+                <div id="edit-image-overlay" class="edit-image-overlay always-visible">
+                  <span class="edit-image-overlay-text">Tap to change</span>
+                </div>
+              </div>
+
+              <!-- Inputs -->
+              <div style="flex: 1; display: flex; flex-direction: column; gap: 12px;">
+                <div class="form-group" id="edit-title-group" style="margin-bottom: 0;">
+                  <label class="form-label" style="font-size: 0.8rem; margin-bottom: 4px;">Object Label</label>
+                  <input type="text" id="edit-title-input" class="form-input" placeholder="Object Label">
+                </div>
+              </div>
+            </div>
+
+            <!-- Memory Description -->
+            <div class="form-group" id="edit-text-group" style="margin-bottom: 0; flex: 1; display: flex; flex-direction: column;">
+              <label class="form-label" style="font-size: 0.8rem; margin-bottom: 4px;">Memory Description</label>
+              <textarea id="edit-text-input" class="form-textarea" placeholder="Memory Description" style="flex: 1; min-height: 120px; resize: none;"></textarea>
+            </div>
+            
+            <!-- Media Selector for Editing Memory -->
+            <div id="edit-media-selector-group" class="media-selector-container" data-target="edit" style="display: none; margin-bottom: 24px;">
+              <button type="button" class="add-media-toggle-btn">📎 Add/Change Media</button>
+              <div class="media-options hidden">
+                <button type="button" class="media-option-btn" data-type="image">🖼️ Image</button>
+                <button type="button" class="media-option-btn" data-type="video">🎬 Video</button>
+                <button type="button" class="media-option-btn" data-type="audio">🎵 Audio</button>
+              </div>
+              <div class="media-selected-state hidden">
+                <span class="media-selected-label"></span>
+                <button type="button" class="media-remove-btn" aria-label="Remove media">×</button>
+              </div>
+              <input type="hidden" id="edit-media-type" value="text">
+            </div>
+
+          </div>
+          
+          <div style="display: flex; flex-direction: column; gap: 12px; margin-top: auto;">
+            <button type="submit" class="action-btn-primary full-width-btn" style="margin: 0;">Save Changes</button>
+            <button type="button" id="edit-withdraw-btn" class="action-btn-primary full-width-btn" style="margin: 0; background: var(--color-brand-red); color: white; border-color: var(--color-brand-red);">Withdraw</button>
+          </div>
+        </form>
+      </div>
+      
+      <!-- SLIDING CHANGE IMAGE CARD -->
+      <div id="inline-change-image-section" class="sliding-card">
+        <div class="sliding-card-header">
+          <h2 class="modal-title" style="font-size: 1.5rem; margin-bottom: 0;">Change Object</h2>
+          <button type="button" id="inline-change-cancel-btn" class="modal-close-btn" aria-label="Close card">×</button>
+        </div>
+        
+        <div class="sliding-card-body" style="flex: 1; display: flex; flex-direction: column; justify-content: center;">
+          <label class="form-label">What object do you want instead?</label>
+          <input type="text" id="new-image-name" class="form-input" placeholder="e.g., Gas cylinder" style="margin-bottom: 24px; margin-top: 16px;">
+          <button type="button" id="inline-change-image-btn" class="action-btn-primary full-width-btn" style="margin: 0;">Change</button>
+        </div>
+        
+        <div id="inline-change-loading" class="hidden" style="position: absolute; inset: 0; background: rgba(250, 248, 245, 0.9); display: flex; align-items: center; justify-content: center; z-index: 10;">
+          <div style="text-align: center;">
+            <div class="ai-spinner" style="margin: 0 auto 16px auto;"></div>
+            <p id="inline-change-loading-text" style="font-family: var(--font-serif); color: var(--color-primary); font-size: 1.2rem;">Please wait...</p>
+          </div>
+        </div>
+      </div>
+      
+    </div>
+
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
